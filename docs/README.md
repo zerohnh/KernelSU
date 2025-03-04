@@ -8,7 +8,7 @@
 >
 > 这是非官方分叉，保留所有权利 [@tiann](https://github.com/tiann)
 
-
+- 已经完全适配非GKI设备
 
 ## 如何添加
 ```
