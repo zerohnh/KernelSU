@@ -9,7 +9,7 @@
     <string name="home_superuser_count">Superusers: %d</string>
     <string name="home_module_count">Modules: %d</string>
     <string name="home_unsupported">Unsupported</string>
-    <string name="home_unsupported_reason">KernelSU only supports GKI kernels now</string>
+    <string name="home_unsupported_reason">No KernelSU driver detected on your kernel, wrong kernel?.</string>
     <string name="home_kernel">Kernel</string>
     <string name="home_susfs">SuSFS: %s</string>
     <string name="home_susfs_version">Version de SuSFS</string>
