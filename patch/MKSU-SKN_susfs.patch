@@ -48,14 +48,16 @@
 
 --- a/kernel/apk_sign.c
 +++ b/kernel/apk_sign.c
-@@ -317,14 +317,16 @@
+@@ -314,17 +314,19 @@
+ 
+ #endif
+ 
  // include custom manager header
  #include "manager_sign.h"
  
 -bool is_manager_apk(char *path)
--{
 +bool ksu_is_manager_apk(char *path)
-+{
+ {
 +#ifdef CONFIG_KSU_SUSFS
  	return (check_v2_signature(path, EXPECTED_SIZE, EXPECTED_HASH) ||
  #if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 10, 0)
@@ -63,12 +65,10 @@
  		check_v2_signature(path, EXPECTED_SIZE_WEISHU, EXPECTED_HASH_WEISHU) ||
  		check_v2_signature(path, EXPECTED_SIZE_SHIRKNEKO, EXPECTED_HASH_SHIRKNEKO) ||
  #endif
--		check_v2_signature(path, EXPECTED_SIZE_RSUNTK, EXPECTED_HASH_RSUNTK) ||
-+		check_v2_signature(path, EXPECTED_SIZE_RSUNTK, EXPECTED_HASH_RSUNTK)
+ 		check_v2_signature(path, EXPECTED_SIZE_RSUNTK, EXPECTED_HASH_RSUNTK) ||
  		check_v2_signature(path, EXPECTED_SIZE_SHIRKNEKO, EXPECTED_HASH_SHIRKNEKO));
--}
 +#endif
-+}
+ }
 
 --- a/kernel/apk_sign.h
 +++ b/kernel/apk_sign.h
