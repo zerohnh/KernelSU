@@ -27,6 +27,22 @@
 #include "kernel_compat.h"
 #include "selinux/selinux.h"
 
+#define KERNEL_VERSION_5_10 KERNEL_VERSION(5, 10, 0)
+
+// Add Auto Add Symbol Export
+#if LINUX_VERSION_CODE < KERNEL_VERSION_5_10 || defined(CONFIG_KSU_HOOK)
+bool ksu_vfs_read_hook = true;
+bool ksu_execveat_hook = true;
+bool ksu_input_hook = false
+#endif
+
+
+#if LINUX_VERSION_CODE < KERNEL_VERSION_5_10 || defined(CONFIG_KSU_HOOK)
+EXPORT_SYMBOL(ksu_vfs_read_hook);
+EXPORT_SYMBOL(ksu_execveat_hook);
+EXPORT_SYMBOL(ksu_input_hook);
+#endif
+
 static const char KERNEL_SU_RC[] =
 	"\n"
 
