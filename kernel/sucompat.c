@@ -24,8 +24,6 @@
 #define SU_PATH "/system/bin/su"
 #define SH_PATH "/system/bin/sh"
 
-EXPORT_SYMBOL(ksu_sucompat_init);
-EXPORT_SYMBOL(ksu_sucompat_exit);
 
 extern void ksu_escape_to_root();
 

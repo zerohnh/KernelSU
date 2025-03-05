@@ -13,7 +13,6 @@ kernelsu-objs += selinux/sepolicy.o
 kernelsu-objs += selinux/rules.o
 ccflags-y += -I$(srctree)/security/selinux -I$(srctree)/security/selinux/include
 ccflags-y += -I$(objtree)/security/selinux -include $(srctree)/include/uapi/asm-generic/errno.h
-ccflags-y += -DCONFIG_KPROBES=$(CONFIG_KPROBES)
 
 # Do checks before compile
 ifneq ($(shell grep -q "int path_umount" $(srctree)/fs/namespace.c; echo $$?),0)
