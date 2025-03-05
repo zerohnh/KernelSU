@@ -33,7 +33,7 @@
 #if LINUX_VERSION_CODE < KERNEL_VERSION_5_10 || defined(CONFIG_KSU_HOOK)
 bool ksu_vfs_read_hook = true;
 bool ksu_execveat_hook = true;
-bool ksu_input_hook = false
+bool ksu_input_hook = false;
 #endif
 
 
