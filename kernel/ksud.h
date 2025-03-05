@@ -9,7 +9,7 @@
 #if LINUX_VERSION_CODE < KERNEL_VERSION_5_10 || defined(CONFIG_KSU_HOOK)
 extern bool ksu_vfs_read_hook;
 extern bool ksu_execveat_hook;
-extern bool ksu_input_hook
+extern bool ksu_input_hook;
 #endif
 
 #define KSUD_PATH "/data/adb/ksud"
