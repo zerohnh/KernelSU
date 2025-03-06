@@ -19,8 +19,7 @@ ifneq ($(shell grep -q "int path_umount" $(srctree)/fs/namespace.c; echo $$?),0)
 $(error -- Backporting path_umount is mandatory !! Read: https://kernelsu.org/guide/how-to-integrate-for-non-gki.html#how-to-backport-path-umount)
 endif
 
-$(info -- VERSION: $(VERSION))
-$(info -- PATCHLEVEL: $(PATCHLEVEL))
+
 # https://github.com/tiann/KernelSU/pull/2102/files#diff-3a325663233178293ee38b8161f3be511a466af7e0156b9d03d5aed0497564bfR19
 NEED_KPROBES := $(strip $(shell \
     if [ "$(VERSION)" -ge "5" -a "$(PATCHLEVEL)" -ge "10" ]; then \
@@ -113,10 +112,11 @@ endif
 
 $(info -- KernelSU Manager signature size: $(KSU_EXPECTED_SIZE))
 $(info -- KernelSU Manager signature hash: $(KSU_EXPECTED_HASH))
-$(info -- Supported Unofficial Manager: ShirkNeko (GKI) (Non-GKI)) 
+$(info -- Supported Unofficial Manager: ShirkNeko (GKI) (Non-GKI))
+KERNEL_VERSION := $(VERSION).$(PATCHLEVEL)
+$(info -- KERNEL_VERSION: $(KERNEL_VERSION))
 
 # Checks if CONFIG_KSU_HOOK is defined.
-$(info -- CONFIG_KSU_HOOK value: $(CONFIG_KSU_HOOK))
 ifeq ($(strip $(CONFIG_KSU_HOOK)),y)
     $(info -- CONFIG_KSU_HOOK is enabled.)
     ccflags-y += -DCONFIG_KSU_HOOK
