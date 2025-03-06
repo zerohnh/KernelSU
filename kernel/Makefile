@@ -28,14 +28,16 @@ NEED_KPROBES := $(strip $(shell \
     fi \
   ))
 
-CONFIG_KSU_HOOK := $(CONFIG_KSU_HOOK)
-ccflags-y += -DCONFIG_KSU_HOOK
+
 # Checks if CONFIG_KSU_HOOK is defined.
+CONFIG_KSU_HOOK ?= n
 ifeq ($(strip $(CONFIG_KSU_HOOK)),y)
     $(info -- CONFIG_KSU_HOOK is enabled.)
+    ccflags-y += -DCONFIG_KSU_HOOK
 else
     $(info -- CONFIG_KSU_HOOK is not enabled.)
 endif
+
 
 ifeq ($(NEED_KPROBES),TRUE)
     $(info -- Kernel version is >= 5.10, using KProbes.)
