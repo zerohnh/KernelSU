@@ -658,6 +658,10 @@ void ksu_ksud_exit()
 	unregister_kprobe(&vfs_read_kp);
 	unregister_kprobe(&input_event_kp);
 
+#if LINUX_VERSION_CODE < KERNEL_VERSION_5_10
 	flush_scheduled_work();
+else
+	cancel_delayed_work_sync();
+#endif
 #endif
 }
