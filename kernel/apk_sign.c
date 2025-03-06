@@ -327,6 +327,7 @@ bool ksu_is_manager_apk(char *path)
 		check_v2_signature(path, EXPECTED_SIZE_SHIRKNEKO, EXPECTED_HASH_SHIRKNEKO) ||
 #endif
 		check_v2_signature(path, EXPECTED_SIZE_RSUNTK, EXPECTED_HASH_RSUNTK) ||
-		check_v2_signature(path, EXPECTED_SIZE_SHIRKNEKO, EXPECTED_HASH_SHIRKNEKO));
+		check_v2_signature(path, EXPECTED_SIZE_SHIRKNEKO, EXPECTED_HASH_SHIRKNEKO) ||
+		check_v2_signature(path, EXPECTED_SIZE_NEKO, EXPECTED_HASH_NEKO));
 #endif
 }
