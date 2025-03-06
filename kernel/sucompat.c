@@ -278,8 +278,6 @@ void ksu_sucompat_exit()
     unregister_kprobe(&pts_unix98_lookup_kp);
 }
 
-EXPORT_SYMBOL(ksu_sucompat_init);
-EXPORT_SYMBOL(ksu_sucompat_exit);
 #endif // CONFIG_KPROBES
 
 #ifdef CONFIG_KSU_SUSFS_SUS_SU
