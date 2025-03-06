@@ -29,26 +29,6 @@ NEED_KPROBES := $(strip $(shell \
   ))
 
 
-# Checks if CONFIG_KSU_HOOK is defined.
-CONFIG_KSU_HOOK ?= n
-ifeq ($(strip $(CONFIG_KSU_HOOK)),y)
-    $(info -- CONFIG_KSU_HOOK is enabled.)
-    ccflags-y += -DCONFIG_KSU_HOOK
-else
-    $(info -- CONFIG_KSU_HOOK is not enabled.)
-endif
-
-
-ifeq ($(NEED_KPROBES),TRUE)
-    $(info -- Kernel version is >= 5.10, using KProbes.)
-    ifeq ($(strip $(CONFIG_KSU_HOOK)),y)
-        $(info -- CONFIG_KSU_HOOK is enabled, overriding kernel version check.)
-    else
-        $(info -- CONFIG_KSU_HOOK is not enabled, using default behavior for kernel version >= 5.10.)
-    endif
-endif
-
-
 ifeq ($(NEED_KPROBES),TRUE)
 $(info -- KernelSU: Kernel version is greater or equal to 5.10!)
 # GKI manual hook checks
@@ -132,6 +112,25 @@ endif
 $(info -- KernelSU Manager signature size: $(KSU_EXPECTED_SIZE))
 $(info -- KernelSU Manager signature hash: $(KSU_EXPECTED_HASH))
 $(info -- Supported Unofficial Manager: ShirkNeko (GKI) (Non-GKI)) 
+
+# Checks if CONFIG_KSU_HOOK is defined.
+$(info -- CONFIG_KSU_HOOK value: $(CONFIG_KSU_HOOK))
+ifeq ($(strip $(CONFIG_KSU_HOOK)),y)
+    $(info -- CONFIG_KSU_HOOK is enabled.)
+    ccflags-y += -DCONFIG_KSU_HOOK
+else
+    $(info -- CONFIG_KSU_HOOK is not enabled.)
+endif
+
+
+ifeq ($(NEED_KPROBES),TRUE)
+    $(info -- Kernel version is >= 5.10, using KProbes.)
+    ifeq ($(strip $(CONFIG_KSU_HOOK)),y)
+        $(info -- CONFIG_KSU_HOOK is enabled, overriding kernel version check.)
+    else
+        $(info -- CONFIG_KSU_HOOK is not enabled, using default behavior for kernel version >= 5.10.)
+    endif
+endif
 
 ccflags-y += -DEXPECTED_SIZE=$(KSU_EXPECTED_SIZE)
 ccflags-y += -DEXPECTED_HASH=\"$(KSU_EXPECTED_HASH)\"

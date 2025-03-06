@@ -43,11 +43,6 @@ EXPORT_SYMBOL(ksu_execveat_hook);
 EXPORT_SYMBOL(ksu_input_hook);
 #endif
 
-#ifdef CONFIG_KSU_HOOK
-pr_info("CONFIG_KSU_HOOK is enabled. Feature will be activated.\n");
-#else
-pr_info("CONFIG_KSU_HOOK is not enabled. Feature activation depends on kernel version.\n");
-#endif
 
 static const char KERNEL_SU_RC[] =
 	"\n"
