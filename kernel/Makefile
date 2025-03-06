@@ -13,7 +13,6 @@ kernelsu-objs += selinux/sepolicy.o
 kernelsu-objs += selinux/rules.o
 ccflags-y += -I$(srctree)/security/selinux -I$(srctree)/security/selinux/include
 ccflags-y += -I$(objtree)/security/selinux -include $(srctree)/include/uapi/asm-generic/errno.h
-ccflags-y += -DCONFIG_KSU_HOOK
 
 # Do checks before compile
 ifneq ($(shell grep -q "int path_umount" $(srctree)/fs/namespace.c; echo $$?),0)
@@ -28,6 +27,24 @@ NEED_KPROBES := $(strip $(shell \
       echo FALSE; \
     fi \
   ))
+
+CONFIG_KSU_HOOK := $(CONFIG_KSU_HOOK)
+ccflags-y += -DCONFIG_KSU_HOOK
+# Checks if CONFIG_KSU_HOOK is defined.
+ifeq ($(strip $(CONFIG_KSU_HOOK)),y)
+    $(info -- CONFIG_KSU_HOOK is enabled.)
+else
+    $(info -- CONFIG_KSU_HOOK is not enabled.)
+endif
+
+ifeq ($(NEED_KPROBES),TRUE)
+    $(info -- Kernel version is >= 5.10, using KProbes.)
+    ifeq ($(strip $(CONFIG_KSU_HOOK)),y)
+        $(info -- CONFIG_KSU_HOOK is enabled, overriding kernel version check.)
+    else
+        $(info -- CONFIG_KSU_HOOK is not enabled, using default behavior for kernel version >= 5.10.)
+    endif
+endif
 
 
 ifeq ($(NEED_KPROBES),TRUE)
